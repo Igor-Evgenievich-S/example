@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТехноЛогика - Telegram-канал о технологиях</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary: #2AABEE;
+            --primary-dark: #229ED9;
+            --dark-bg: #0F0F0F;
+            --dark-card: #1A1A1A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --accent: #8A2BE2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 24px 0;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(42, 171, 238, 0.15), transparent 30%),
+                        radial-gradient(circle at bottom left, rgba(138, 43, 226, 0.15), transparent 30%);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .subscribe-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
+        }
+        
+        .subscribe-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 171, 238, 0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--dark-card);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+        
+        /* Topics Section */
+        .topics {
+            padding: 100px 0;
+            background: radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.1), transparent 40%);
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .topic-card {
+            background-color: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-card:hover {
+            background: linear-gradient(135deg, var(--dark-card), rgba(42, 171, 238, 0.1));
+        }
+        
+        .topic-emoji {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Schedule Section */
+        .schedule {
+            padding: 100px 0;
+        }
+        
+        .schedule-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .schedule-item {
+            display: flex;
+            margin-bottom: 30px;
+            background-color: var(--dark-card);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .schedule-time {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 20px;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .schedule-day {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .schedule-hour {
+            font-size: 0.9rem;
+        }
+        
+        .schedule-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(42, 171, 238, 0.1), rgba(138, 43, 226, 0.1));
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .schedule-item {
+                flex-direction: column;
+            }
+            
+            .schedule-time {
+                flex-direction: row;
+                justify-content: space-around;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span>ТехноЛогика</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Будущее технологий уже здесь</h1>
+            <p>Присоединяйтесь к нашему Telegram-каналу, где мы исследуем самые интересные технологические тренды, новости и инновации</p>
+            <a href="https://t.me/your_channel" class="subscribe-btn" target="_blank">Подписаться на канал</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Почему наш канал?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Экспертный анализ</h3>
+                    <p>Мы не просто пересказываем новости, а глубоко анализируем технологические тренды и их влияние на индустрию.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Оперативность</h3>
+                    <p>Первыми сообщаем о важнейших событиях в мире технологий. Будьте в курсе всего, что происходит.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Только важное</h3>
+                    <p>Никакого спама и лишней информации. Только качественный контент, который действительно стоит вашего времени.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="topics">
+        <div class="container">
+            <h2 class="section-title">Темы канала</h2>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-emoji">🤖</div>
+                    <h3>Искусственный интеллект</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">🔐</div>
+                    <h3>Кибербезопасность</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">💻</div>
+                    <h3>Разработка ПО</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">📱</div>
+                    <h3>Мобильные технологии</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">🌐</div>
+                    <h3>Web & Blockchain</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">🚀</div>
+                    <h3>Стартапы и инновации</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">🖥️</div>
+                    <h3>Аппаратное обеспечение</h3>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-emoji">📊</div>
+                    <h3>Аналитика и прогнозы</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="schedule">
+        <div class="container">
+            <h2 class="section-title">Расписание публикаций</h2>
+            <div class="schedule-container">
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <span class="schedule-day">ПН-ПТ</span>
+                        <span class="schedule-hour">09:00</span>
+                    </div>
+                    <div class="schedule-content">
+                        <h3>Утренний дайджест</h3>
+                        <p>Короткий обзор главных технологических новостей, чтобы начать день в курсе событий</p>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <span class="schedule-day">ВТ, ЧТ</span>
+                        <span class="schedule-hour">15:00</span>
+                    </div>
+                    <div class="schedule-content">
+                        <h3>Глубокий анализ</h3>
+                        <p>Подробный разбор ключевых тем и трендов в технологической индустрии</p>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <span class="schedule-day">СР</span>
+                        <span class="schedule-hour">18:00</span>
+                    </div>
+                    <div class="schedule-content">
+                        <h3>Новинки гаджетов</h3>
+                        <p>Обзоры новых устройств, сравнения и рекомендации по выбору техники</p>
+                    </div>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <span class="schedule-day">ПТ</span>
+                        <span class="schedule-hour">17:00</span>
+                    </div>
+                    <div class="schedule-content">
+                        <h3>Итоги недели</h3>
+                        <p>Самые важные события технологической недели в одном дайджесте</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Присоединяйтесь к нашему сообществу</h2>
+            <p>Подпишитесь на канал и будьте в курсе всех технологических новинок и трендов</p>
+            <a href="https://t.me/your_channel" class="subscribe-btn" target="_blank">Подписаться на канал</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 ТехноЛогика — Telegram-канал о технологиях. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
