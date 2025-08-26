@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Travel — Открой новый горизонт</title>
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Иконочный шрифт -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Базовые сбросы стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #040F16;
+            background-color: #FBFBFF;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: #01BAEF;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0B4F6C;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #01BAEF;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #0B4F6C;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(1, 186, 239, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #01BAEF;
+            color: #01BAEF;
+        }
+
+        .btn-outline:hover {
+            background: #01BAEF;
+            color: white;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #01BAEF, #20BF55);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Навигация */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(251, 251, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(4, 15, 22, 0.1);
+            padding: 15px 0;
+            transition: padding 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0B4F6C;
+        }
+
+        .logo span {
+            color: #01BAEF;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #040F16;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        nav ul li a:hover {
+            color: #01BAEF;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(11, 79, 108, 0.7), rgba(1, 186, 239, 0.4));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* О нас */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0B4F6C;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Галерея направлений */
+        .destinations {
+            background-color: #f8f9fa;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(4, 15, 22, 0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(70px);
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Популярные туры */
+        .tours {
+            background-color: white;
+        }
+
+        .tour-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tour-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .tour-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .tour-content {
+            padding: 20px;
+        }
+
+        .tour-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .tour-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .tour-price {
+            color: #0B4F6C;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Форма заявки */
+        .booking {
+            background: linear-gradient(135deg, #0B4F6C, #01BAEF);
+            color: white;
+        }
+
+        .booking .section-title::after {
+            background: white;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            color: #040F16;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Open Sans', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #01BAEF;
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #040F16;
+            color: #FBFBFF;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: #01BAEF;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+        }
+
+        .footer-column ul li a:hover {
+            color: #01BAEF;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #01BAEF;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            nav ul {
+                display: none; /* Для мобильных нужно гамбургер-меню */
+            }
+
+            .header-container {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Horizon<span>Travel</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#destinations">Направления</a></li>
+                    <li><a href="#tours">Туры</a></li>
+                    <li><a href="#booking">Заявка</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://cdn.pixabay.com/video/2023/05/24/163254_843874131_1080p.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Открой для себя новый горизонт</h1>
+            <p>Откройте для себя уникальные направления по всему миру с нашим индивидуальным подходом к планированию путешествий.</p>
+            <a href="#booking" class="btn">Найти путешествие</a>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Почему мы?</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Horizon Travel — это более 10 лет опыта в организации незабываемых путешествий. Мы тщательно отбираем каждое направление и партнера, чтобы ваш отдых был идеальным от начала и до конца.</p>
+                    <p>Наша философия проста: путешествие должно вдохновлять, обогащать и дарить только положительные эмоции.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat1">0</span>
+                            <span class="stat-label">Стран</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat2">0</span>
+                            <span class="stat-label">Туров</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="stat3">0</span>
+                            <span class="stat-label">Туристов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Галерея направлений -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <h2 class="section-title">Популярные направления</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&h=400" alt="Бали, Индонезия" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Бали, Индонезия</h3>
+                        <p>Тропический рай с древними храмами и рисовыми террасами.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596445836561-991bcd39ab2c?auto=format&fit=crop&w=600&h=400" alt="Санторини, Греция" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Санторини, Греция</h3>
+                        <p>Белоснежные дома на скалах с видом на бескрайнее Эгейское море.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1580731423257-0da90cce7283?auto=format&fit=crop&w=600&h=400" alt="Кейптаун, ЮАР" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Кейптаун, ЮАР</h3>
+                        <p>Где океан встречается с горами, создавая незабываемые пейзажи.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Популярные туры -->
+    <section id="tours" class="tours">
+        <div class="container">
+            <h2 class="section-title">Наши популярные туры</h2>
+            <div class="tour-cards">
+                <div class="tour-card">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=600&h=200" alt="Романтическая Италия" class="tour-image">
+                    <div class="tour-content">
+                        <h3 class="tour-title">Романтическая Италия</h3>
+                        <div class="tour-info">
+                            <span><i class="fas fa-calendar-alt"></i> 10 дней</span>
+                            <span><i class="fas fa-user"></i> 2 человека</span>
+                        </div>
+                        <p>Рим, Флоренция и Венеция — погружение в искусство, историю и кухню.</p>
+                        <div class="tour-price">от 120 000 ₽</div>
+                        <a href="#booking" class="btn btn-outline">Забронировать</a>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <img src="https://images.unsplash.com/photo-1543085614-fe71022e613e?auto=format&fit=crop&w=600&h=200" alt="Сафари в Танзании" class="tour-image">
+                    <div class="tour-content">
+                        <h3 class="tour-title">Сафари в Танзании</h3>
+                        <div class="tour-info">
+                            <span><i class="fas fa-calendar-alt"></i> 14 дней</span>
+                            <span><i class="fas fa-user"></i> 6 человек</span>
+                        </div>
+                        <p>Национальные парки Серенгети и Нгоронгоро. Увидьте большую пятерку!</p>
+                        <div class="tour-price">от 220 000 ₽</div>
+                        <a href="#booking" class="btn btn-outline">Забронировать</a>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&h=200" alt="Природа Норвегии" class="tour-image">
+                    <div class="tour-content">
+                        <h3 class="tour-title">Природа Норвегии</h3>
+                        <div class="tour-info">
+                            <span><i class="fas fa-calendar-alt"></i> 8 дней</span>
+                            <span><i class="fas fa-user"></i> 4-12 человек</span>
+                        </div>
+                        <p>Фьорды, северное сияние и уникальная скандинавская культура.</p>
+                        <div class="tour-price">от 145 000 ₽</div>
+                        <a href="#booking" class="btn btn-outline">Забронировать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма заявки -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2 class="section-title">Заявка на путешествие</h2>
+            <div class="form-container">
+                <form id="travel-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="people">Количество человек</label>
+                            <select id="people" class="form-control" required>
+                                <option value="">Выберите...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3-5">3-5</option>
+                                <option value="6+">6+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Предпочтительное направление</label>
+                        <select id="destination" class="form-control">
+                            <option value="">Выберите...</option>
+                            <option value="bali">Бали, Индонезия</option>
+                            <option value="santorini">Санторини, Греция</option>
+                            <option value="capetown">Кейптаун, ЮАР</option>
+                            <option value="italy">Италия</option>
+                            <option value="tanzania">Танзания</option>
+                            <option value="norway">Норвегия</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ваши пожелания</label>
+                        <textarea id="message" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Horizon Travel</h3>
+                    <p>Мы делаем ваши мечты о путешествиях реальностью. Доверьте нам свой отдых, и мы создадим для вас незабываемые впечатления.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Туристическая, 15</li>
+                        <li><i class="fas fa-phone"></i> +7 (495) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@horizontravel.ru</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Мы в соцсетях</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Horizon Travel. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('nav a, .hero-content a, .tour-card a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Фиксация хедера при скролле
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Анимация счетчиков в секции "О нас"
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16); // 60fps
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = Math.round(target);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.round(start);
+                }
+            }, 16);
+        }
+
+        // Запуск анимации счетчиков при прокрутке до секции
+        function initCounters() {
+            const stat1 = document.getElementById('stat1');
+            const stat2 = document.getElementById('stat2');
+            const stat3 = document.getElementById('stat3');
+            
+            animateCounter(stat1, 57, 2000);
+            animateCounter(stat2, 203, 2000);
+            animateCounter(stat3, 2450, 2000);
+        }
+
+        // Отслеживание появления секции в viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initCounters();
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.getElementById('about'));
+
+        // Обработка формы
+        document.getElementById('travel-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
