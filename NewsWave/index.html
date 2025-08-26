@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsWave - Новостной Telegram-канал</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0088cc;
+            --primary-dark: #006da3;
+            --secondary: #ff5722;
+            --dark-bg: #121212;
+            --dark-card: #1e1e1e;
+            --light-bg: #f5f5f5;
+            --light-card: #ffffff;
+            --dark-text: #212121;
+            --light-text: #f5f5f5;
+            --gray-text: #757575;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-theme {
+            --bg: var(--dark-bg);
+            --card-bg: var(--dark-card);
+            --text: var(--light-text);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .light-theme {
+            --bg: var(--light-bg);
+            --card-bg: var(--light-card);
+            --text: var(--dark-text);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text);
+            font-size: 1.2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .subscribe-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hot News Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .hot-news {
+            padding: 40px 0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .news-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-card.hot {
+            border-top: 4px solid var(--secondary);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--gray-text);
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .news-excerpt {
+            color: var(--gray-text);
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+
+        .hot-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Archive Section */
+        .archive {
+            padding: 40px 0;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .archive-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .archive-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: var(--bg);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .archive-item:hover {
+            transform: translateX(5px);
+        }
+
+        .archive-date {
+            min-width: 60px;
+            text-align: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .archive-title {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        /* Subscription Section */
+        .subscription {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .subscription p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: var(--primary-dark);
+        }
+
+        .copyright {
+            color: var(--gray-text);
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .news-grid, .archive-list {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body class="light-theme">
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fab fa-telegram"></i>
+                    <span>NewsWave</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#hot">Горячие новости</a>
+                    <a href="#archive">Архив</a>
+                    <a href="#subscribe">Подписаться</a>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Будьте в курсе всех событий</h1>
+            <p>Подпишитесь на наш Telegram-канал и получайте самые свежие и важные новости первыми. Только проверенная информация без спама.</p>
+            <a href="#" class="subscribe-btn">
+                <i class="fab fa-telegram"></i>
+                Подписаться на канал
+            </a>
+        </div>
+    </section>
+
+    <section class="hot-news" id="hot">
+        <div class="container">
+            <h2 class="section-title">Горячие новости</h2>
+            <div class="news-grid" id="newsGrid">
+                <!-- News will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section class="archive" id="archive">
+        <div class="container">
+            <h2 class="section-title">Архив публикаций</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="politics">Политика</button>
+                <button class="filter-btn" data-filter="tech">Технологии</button>
+                <button class="filter-btn" data-filter="economy">Экономика</button>
+                <button class="filter-btn" data-filter="sports">Спорт</button>
+            </div>
+            <div class="archive-list" id="archiveList">
+                <!-- Archive items will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <section class="subscription" id="subscribe">
+        <div class="container">
+            <h2 class="section-title">Подпишитесь прямо сейчас</h2>
+            <p>Присоединяйтесь к тысячам подписчиков, которые уже получают самую актуальную информацию из наших источников.</p>
+            <a href="#" class="subscribe-btn">
+                <i class="fab fa-telegram"></i>
+                Перейти в Telegram
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <i class="fab fa-telegram"></i>
+                <span>NewsWave</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">О нас</a>
+                <a href="#">Контакты</a>
+                <a href="#">Реклама</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">© 2023 NewsWave. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Sample News Data
+        const newsData = [
+            {
+                id: 1,
+                title: "Важное политическое событие произошло сегодня утром",
+                excerpt: "Краткое описание новости, которое заинтересует пользователя и заставит его прочитать полностью...",
+                date: "15 мая 2023",
+                image: "https://placehold.co/600x400/0088cc/white?text=Политика",
+                category: "politics",
+                hot: true
+            },
+            {
+                id: 2,
+                title: "Новый технологический прорыв в области искусственного интеллекта",
+                excerpt: "Ученые объявили о создании новой модели ИИ, которая превосходит все ожидания...",
+                date: "14 мая 2023",
+                image: "https://placehold.co/600x400/ff5722/white?text=Технологии",
+                category: "tech",
+                hot: true
+            },
+            {
+                id: 3,
+                title: "Курс рубля продолжает укрепляться на международном рынке",
+                excerpt: "Эксперты анализируют причины неожиданного роста национальной валюты...",
+                date: "13 мая 2023",
+                image: "https://placehold.co/600x400/4caf50/white?text=Экономика",
+                category: "economy",
+                hot: false
+            },
+            {
+                id: 4,
+                title: "Спортивная команда страны завоевала золотые медали на чемпионате",
+                excerpt: "Историческое достижение отечественных спортсменов на международной арене...",
+                date: "12 мая 2023",
+                image: "https://placehold.co/600x400/f44336/white?text=Спорт",
+                category: "sports",
+                hot: true
+            },
+            {
+                id: 5,
+                title: "Крупная кибератака на мировые финансовые institution",
+                excerpt: "Эксперты по кибербезопасности работают над устранением последствий масштабной атаки...",
+                date: "11 мая 2023",
+                image: "https://placehold.co/600x400/673ab7/white?text=Безопасность",
+                category: "tech",
+                hot: false
+            },
+            {
+                id: 6,
+                title: "Изменения в налоговом законодательстве с следующего месяца",
+                excerpt: "Что нужно знать гражданам и бизнесу о готовящихся изменениях в налоговой системе...",
+                date: "10 мая 2023",
+                image: "https://placehold.co/600x400/009688/white?text=Налоги",
+                category: "economy",
+                hot: false
+            }
+        ];
+
+        // Sample Archive Data
+        const archiveData = [
+            { id: 1, title: "Интервью с ведущим экономистом страны", date: "10 мая", category: "economy" },
+            { id: 2, title: "Анализ предстоящих выборов", date: "9 мая", category: "politics" },
+            { id: 3, title: "Новые гаджеты, представленные на выставке", date: "8 мая", category: "tech" },
+            { id: 4, title: "Футбольный матч закончился сенсационным результатом", date: "7 мая", category: "sports" },
+            { id: 5, title: "Криптовалюты снова показывают рост", date: "6 мая", category: "economy" },
+            { id: 6, title: "Заявление официального представителя МИД", date: "5 мая", category: "politics" },
+            { id: 7, title: "Игровая индустрия бьет рекорды по доходам", date: "4 мая", category: "tech" },
+            { id: 8, title: "Подготовка к Олимпийским играм в полном разгаре", date: "3 мая", category: "sports" }
+        ];
+
+        // Render News
+        function renderNews() {
+            const newsGrid = document.getElementById('newsGrid');
+            newsGrid.innerHTML = '';
+            
+            newsData.forEach(news => {
+                const newsCard = document.createElement('div');
+                newsCard.className = `news-card ${news.hot ? 'hot' : ''}`;
+                
+                newsCard.innerHTML = `
+                    ${news.hot ? '<div class="hot-badge">Горячее</div>' : ''}
+                    <img src="${news.image}" alt="${news.title}" class="news-image">
+                    <div class="news-content">
+                        <div class="news-date">${news.date}</div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-excerpt">${news.excerpt}</p>
+                        <a href="#" class="read-more">Читать далее <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+                
+                newsGrid.appendChild(newsCard);
+            });
+        }
+
+        // Render Archive
+        function renderArchive(filter = 'all') {
+            const archiveList = document.getElementById('archiveList');
+            archiveList.innerHTML = '';
+            
+            const filteredData = filter === 'all' 
+                ? archiveData 
+                : archiveData.filter(item => item.category === filter);
+            
+            filteredData.forEach(item => {
+                const archiveItem = document.createElement('div');
+                archiveItem.className = 'archive-item';
+                
+                archiveItem.innerHTML = `
+                    <div class="archive-date">${item.date}</div>
+                    <div class="archive-title">${item.title}</div>
+                    <a href="#" class="read-more"><i class="fas fa-arrow-right"></i></a>
+                `;
+                
+                archiveList.appendChild(archiveItem);
+            });
+        }
+
+        // Filter Buttons
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                renderArchive(button.dataset.filter);
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNews();
+            renderArchive();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
