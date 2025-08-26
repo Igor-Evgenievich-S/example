@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportPro - Магазин спортивной экипировки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2B2D42;
+            --accent: #EF233C;
+            --background: #F8F9FA;
+            --secondary-text: #8D99AE;
+            --white: #FFFFFF;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary);
+            background-color: var(--background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-icons i {
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .nav-icons i:hover {
+            color: var(--accent);
+        }
+        
+        .menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, #2B2D42 0%, #1a1c2b 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #d90429;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .hero-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(239, 35, 60, 0.1);
+            animation: pulse 15s infinite alternate;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            animation-delay: 0.5s;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: 10%;
+            animation-delay: 1s;
+        }
+        
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: -75px;
+            animation-delay: 2s;
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.1);
+        }
+        
+        .category-content {
+            padding: 20px;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .category-content p {
+            color: var(--secondary-text);
+            margin-bottom: 15px;
+        }
+        
+        /* Promotions Section */
+        .promotions {
+            padding: 80px 0;
+            background: linear-gradient(to right, #2B2D42, #1a1c2b);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .promo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .promo-header h2 {
+            font-size: 2.5rem;
+        }
+        
+        .promo-header h2 span {
+            color: var(--accent);
+        }
+        
+        .countdown {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .countdown-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .promo-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .promo-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 2;
+        }
+        
+        .promo-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .promo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .promo-card:hover .promo-img img {
+            transform: scale(1.1);
+        }
+        
+        .promo-content {
+            padding: 20px;
+        }
+        
+        .promo-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .price {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .old-price {
+            font-size: 1.1rem;
+            text-decoration: line-through;
+            color: var(--secondary-text);
+            margin-left: 15px;
+        }
+        
+        /* Reviews Section */
+        .reviews {
+            padding: 100px 0;
+        }
+        
+        .reviews-slider {
+            margin: 0 auto;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        .review-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .review-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 4px solid var(--accent);
+        }
+        
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .review-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .review-text:before, .review-text:after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .review-text:before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .review-text:after {
+            bottom: -40px;
+            right: -10px;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .review-rating {
+            color: #FFD700;
+            margin: 10px 0;
+        }
+        
+        /* Slider Navigation */
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--secondary-text);
+            margin: 0 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background-color: var(--accent);
+            transform: scale(1.3);
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2B2D42 0%, #1a1c2b 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .newsletter-btn {
+            padding: 0 30px;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #d90429;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .promo-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                gap: 30px;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                border-radius: 30px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .categories, .reviews {
+                padding: 60px 0;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>SportPro</span>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="#categories">Категории</a></li>
+                    <li><a href="#promotions">Акции</a></li>
+                    <li><a href="#reviews">Отзывы</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                
+                <div class="nav-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fas fa-user"></i>
+                    <div class="menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-animation">
+            <div class="hero-bg-circle circle-1"></div>
+            <div class="hero-bg-circle circle-2"></div>
+            <div class="hero-bg-circle circle-3"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Экипировка для настоящих чемпионов</h1>
+                <p>Откройте для себя новейшую коллекцию спортивной одежды, обуви и аксессуаров со скидкой до 40%</p>
+                <a href="#promotions" class="btn">Смотреть акции</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Категории</h2>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Обувь">
+                    </div>
+                    <div class="category-content">
+                        <h3>Обувь</h3>
+                        <p>Кроссовки для бега, тренировок и повседневной носки</p>
+                        <a href="#" class="btn">Смотреть</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Одежда">
+                    </div>
+                    <div class="category-content">
+                        <h3>Одежда</h3>
+                        <p>Спортивные костюмы, футболки, шорты и многое другое</p>
+                        <a href="#" class="btn">Смотреть</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80" alt="Аксессуары">
+                    </div>
+                    <div class="category-content">
+                        <h3>Аксессуары</h3>
+                        <p>Сумки, бутылки для воды, фитнес-трекеры и многое другое</p>
+                        <a href="#" class="btn">Смотреть</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Тренажеры">
+                    </div>
+                    <div class="category-content">
+                        <h3>Тренажеры</h3>
+                        <p>Профессиональное оборудование для домашних тренировок</p>
+                        <a href="#" class="btn">Смотреть</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Section -->
+    <section class="promotions" id="promotions">
+        <div class="container">
+            <div class="promo-header">
+                <h2>Горячие <span>акции</span></h2>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">02</span>
+                        <span class="countdown-label">дней</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">12</span>
+                        <span class="countdown-label">часов</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">45</span>
+                        <span class="countdown-label">минут</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">30</span>
+                        <span class="countdown-label">секунд</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="promo-grid">
+                <div class="promo-card">
+                    <div class="promo-badge">-30%</div>
+                    <div class="promo-img">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Беговые кроссовки">
+                    </div>
+                    <div class="promo-content">
+                        <h3>Беговые кроссовки UltraBoost</h3>
+                        <p>Идеальная обувь для бега и повседневной носки</p>
+                        <div class="price">
+                            <span class="current-price">7 999 ₽</span>
+                            <span class="old-price">11 499 ₽</span>
+                        </div>
+                        <a href="#" class="btn">Купить сейчас</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-badge">-25%</div>
+                    <div class="promo-img">
+                        <img src="https://images.unsplash.com/photo-1434682881908-b43d0467b798?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80" alt="Спортивный костюм">
+                    </div>
+                    <div class="promo-content">
+                        <h3>Спортивный костюм FitnessPro</h3>
+                        <p>Стильный и удобный костюм для тренировок</p>
+                        <div class="price">
+                            <span class="current-price">5 599 ₽</span>
+                            <span class="old-price">7 499 ₽</span>
+                        </div>
+                        <a href="#" class="btn">Купить сейчас</a>
+                    </div>
+                </div>
+                
+                <div class="promo-card">
+                    <div class="promo-badge">-40%</div>
+                    <div class="promo-img">
+                        <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Гантели">
+                    </div>
+                    <div class="promo-content">
+                        <h3>Набор гантелей 20 кг</h3>
+                        <p>Профессиональные разборные гантели с покрытием</p>
+                        <div class="price">
+                            <span class="current-price">8 399 ₽</span>
+                            <span class="old-price">13 999 ₽</span>
+                        </div>
+                        <a href="#" class="btn">Купить сейчас</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2>Отзывы покупателей</h2>
+            </div>
+            
+            <div class="reviews-slider">
+                <div class="review-card">
+                    <div class="review-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Алексей">
+                    </div>
+                    <div class="review-text">
+                        <p>Заказывал беговые кроссовки. Очень доволен качеством и сервисом. Доставили быстро, размер подошел идеально. Теперь бегаю с удовольствием!</p>
+                    </div>
+                    <div class="review-author">Алексей Иванов</div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-nav">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="contact">
+        <div class="container">
+            <h2>Подпишитесь на рассылку</h2>
+            <p>Узнавайте первыми о новых коллекциях, эксклюзивных скидках и специальных предложениях</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Ваш email">
+                <button type="submit" class="newsletter-btn">Подписаться</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О компании</h3>
+                    <p>SportPro - ведущий магазин спортивной экипировки с более чем 10-летним опытом работы на рынке.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Мужская одежда</a></li>
+                        <li><a href="#">Женская одежда</a></li>
+                        <li><a href="#">Обувь</a></li>
+                        <li><a href="#">Аксессуары</a></li>
+                        <li><a href="#">Тренажеры</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Полезные ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат и обмен</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Спортивная, 15</p>
+                    <p><i class="fas fa-phone"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@sportpro.ru</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SportPro. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Countdown Timer
+        function updateCountdown() {
+            const days = document.getElementById('days');
+            const hours = document.getElementById('hours');
+            const minutes = document.getElementById('minutes');
+            const seconds = document.getElementById('seconds');
+            
+            let daysValue = parseInt(days.textContent);
+            let hoursValue = parseInt(hours.textContent);
+            let minutesValue = parseInt(minutes.textContent);
+            let secondsValue = parseInt(seconds.textContent);
+            
+            secondsValue--;
+            
+            if (secondsValue < 0) {
+                secondsValue = 59;
+                minutesValue--;
+                
+                if (minutesValue < 0) {
+                    minutesValue = 59;
+                    hoursValue--;
+                    
+                    if (hoursValue < 0) {
+                        hoursValue = 23;
+                        daysValue--;
+                        
+                        if (daysValue < 0) {
+                            daysValue = 0;
+                            hoursValue = 0;
+                            minutesValue = 0;
+                            secondsValue = 0;
+                        }
+                    }
+                }
+            }
+            
+            days.textContent = daysValue.toString().padStart(2, '0');
+            hours.textContent = hoursValue.toString().padStart(2, '0');
+            minutes.textContent = minutesValue.toString().padStart(2, '0');
+            seconds.textContent = secondsValue.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        
+        // Simple Reviews Slider
+        const dots = document.querySelectorAll('.slider-dot');
+        const reviewCard = document.querySelector('.review-card');
+        const reviews = [
+            {
+                text: "Заказывал беговые кроссовки. Очень доволен качеством и сервисом. Доставили быстро, размер подошел идеально. Теперь бегаю с удовольствием!",
+                author: "Алексей Иванов",
+                avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                rating: 5
+            },
+            {
+                text: "Покупкой довольна! Куртка отлично сидит, материал качественный. Заказ пришел вовремя, курьер был вежлив. Обязательно буду заказывать еще!",
+                author: "Мария Петрова",
+                avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+                rating: 4
+            },
+            {
+                text: "Приобрел гантели и несколько аксессуаров. Качество на высоте, цены адекватные. Сервис на пять с плюсом! Рекомендую этот магазин.",
+                author: "Дмитрий Смирнов",
+                avatar: "https://randomuser.me/api/portraits/men/67.jpg",
+                rating: 5
+            }
+        ];
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                // Update active dot
+                document.querySelector('.slider-dot.active').classList.remove('active');
+                dot.classList.add('active');
+                
+                // Update review content
+                const review = reviews[index];
+                reviewCard.querySelector('.review-text p').textContent = review.text;
+                reviewCard.querySelector('.review-author').textContent = review.author;
+                reviewCard.querySelector('.review-avatar img').src = review.avatar;
+                
+                // Update rating
+                const ratingEl = reviewCard.querySelector('.review-rating');
+                ratingEl.innerHTML = '';
+                for (let i = 0; i < 5; i++) {
+                    const star = document.createElement('i');
+                    star.className = 'fas fa-star';
+                    if (i < review.rating) {
+                        star.style.color = '#FFD700';
+                    } else {
+                        star.style.color = '#ddd';
+                    }
+                    ratingEl.appendChild(star);
+                }
+            });
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.category-card, .promo-card, .review-card');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                
+                if (position.top < window.innerHeight - 100) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize animation styles
+        document.querySelectorAll('.category-card, .promo-card, .review-card').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
