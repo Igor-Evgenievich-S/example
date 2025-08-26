@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семейное кафе "Вкусный уголок"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #8B4513;
+            --secondary: #F5DEB3;
+            --accent: #A52A2A;
+            --light: #FFF8DC;
+            --dark: #4B0082;
+            --text: #333333;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        section {
+            margin: 60px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .about {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .menu-item:hover .menu-image img {
+            transform: scale(1.1);
+        }
+        
+        .menu-content {
+            padding: 20px;
+        }
+        
+        .menu-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .menu-price {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        .reviews-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .review {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            position: relative;
+        }
+        
+        .review-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .review-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .review-name {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .reservation {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudCUyMHRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .reservation h2 {
+            color: white;
+        }
+        
+        .reservation h2:after {
+            background: var(--secondary);
+        }
+        
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-mug-hot"></i>
+        </div>
+        <h1>Семейное кафе "Вкусный уголок"</h1>
+        <p class="tagline">Место, где вкусная еда и уютная атмосфера создают незабываемые моменты для всей семьи</p>
+        <a href="#reservation" class="btn">Забронировать столик</a>
+    </header>
+    
+    <div class="container">
+        <section class="about">
+            <h2>О нашем кафе</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Добро пожаловать в наше уютное семейное кафе, где каждый почувствует себя как дома! Мы создали место, где можно насладиться вкусной домашней едой, провести время с близкими и отдохнуть от городской суеты.</p>
+                    <p>Наша кухня сочетает в себе лучшие традиции домашней кухни и современные гастрономические тенденции. Мы используем только свежие и качественные продукты, чтобы порадовать вас неповторимым вкусом наших блюд.</p>
+                    <p>В нашем кафе есть специальная детская зона с игровым уголком, где малыши могут весело провести время под присмотром аниматора, пока родители наслаждаются трапезой.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Интерьер кафе">
+                </div>
+            </div>
+        </section>
+        
+        <section class="menu">
+            <h2>Наше меню</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Пицца">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Домашняя пицца</h3>
+                        <p>Свежее тесто, фирменный томатный соус и начинка на выбор</p>
+                        <p class="menu-price">450 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2FsYWR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Салат">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Свежий салат</h3>
+                        <p>Смесь салатных листьев, овощей с заправкой на выбор</p>
+                        <p class="menu-price">320 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGFzdGF8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Паста">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Итальянская паста</h3>
+                        <p>Спагетти с соусом болоньезе или карбонара</p>
+                        <p class="menu-price">380 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Десерт">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Домашний десерт</h3>
+                        <p>Тирамису, чизкейк или ягодный пирог на выбор</p>
+                        <p class="menu-price">280 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1517244683847-7456b63c5969?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Кофе">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Ароматный кофе</h3>
+                        <p>Эспрессо, капучино, латте и другие виды кофе</p>
+                        <p class="menu-price">180 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Смузи">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Фруктовые смузи</h3>
+                        <p>Освежающие смузи из свежих фруктов и ягод</p>
+                        <p class="menu-price">250 руб.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="reviews">
+            <h2>Отзывы наших гостей</h2>
+            <div class="reviews-container">
+                <div class="review">
+                    <div class="review-text">
+                        "Очень уютное место с потрясающей атмосферой! Еда была восхитительной, особенно пицца. Обслуживание на высшем уровне. Обязательно вернемся снова!"
+                    </div>
+                    <div class="review-author">
+                        <div class="review-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Анна">
+                        </div>
+                        <div>
+                            <div class="review-name">Анна и Михаил</div>
+                            <div>Постоянные гости</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review">
+                    <div class="review-text">
+                        "Идеальное место для семейного ужина! Детям очень понравился игровой уголок, а мы смогли спокойно поужинать и пообщаться. Блюда очень вкусные и порции generous."
+                    </div>
+                    <div class="review-author">
+                        <div class="review-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Дмитрий">
+                        </div>
+                        <div>
+                            <div class="review-name">Дмитрий и семья</div>
+                            <div>Гости</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review">
+                    <div class="review-text">
+                        "Были на завтраке в этом милом кафе - остались в полном восторге! Кофе просто великолепный, выпечка свежайшая. Интерьер очень стильный и уютный. Рекомендую!"
+                    </div>
+                    <div class="review-author">
+                        <div class="review-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Елена">
+                        </div>
+                        <div>
+                            <div class="review-name">Елена</div>
+                            <div>Постоянный гость</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="reservation" class="reservation">
+            <h2>Забронируйте столик</h2>
+            <p>Оставьте заявку, и мы свяжемся с вами для подтверждения бронирования</p>
+            <form class="reservation-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Ваш телефон" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <input type="time" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="" disabled selected>Количество гостей</option>
+                        <option value="1">1 человек</option>
+                        <option value="2">2 человека</option>
+                        <option value="3">3 человека</option>
+                        <option value="4">4 человека</option>
+                        <option value="5+">5 и более человек</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Забронировать</button>
+            </form>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-mug-hot"></i>
+            </div>
+            <div class="contact-info">
+                <p>г. Москва, ул. Примерная, 15</p>
+                <p>Телефон: +7 (495) 123-45-67</p>
+                <p>Часы работы: ежедневно с 9:00 до 23:00</p>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>© 2023 Семейное кафе "Вкусный уголок". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка формы бронирования
+        document.querySelector('.reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время для подтверждения бронирования.');
+            this.reset();
+        });
+        
+        // Плавная прокрутка к разделу бронирования
+        document.querySelector('a[href="#reservation"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#reservation').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Семейное кафе "Вкусный уголок"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #8B4513;
+            --secondary: #F5DEB3;
+            --accent: #A52A2A;
+            --light: #FFF8DC;
+            --dark: #4B0082;
+            --text: #333333;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        section {
+            margin: 60px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .about {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .menu-item:hover .menu-image img {
+            transform: scale(1.1);
+        }
+        
+        .menu-content {
+            padding: 20px;
+        }
+        
+        .menu-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .menu-price {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        .reviews-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .review {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            position: relative;
+        }
+        
+        .review-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .review-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .review-name {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .reservation {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudCUyMHRhYmxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .reservation h2 {
+            color: white;
+        }
+        
+        .reservation h2:after {
+            background: var(--secondary);
+        }
+        
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-icons {
+            margin: 20px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-mug-hot"></i>
+        </div>
+        <h1>Семейное кафе "Вкусный уголок"</h1>
+        <p class="tagline">Место, где вкусная еда и уютная атмосфера создают незабываемые моменты для всей семьи</p>
+        <a href="#reservation" class="btn">Забронировать столик</a>
+    </header>
+    
+    <div class="container">
+        <section class="about">
+            <h2>О нашем кафе</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Добро пожаловать в наше уютное семейное кафе, где каждый почувствует себя как дома! Мы создали место, где можно насладиться вкусной домашней едой, провести время с близкими и отдохнуть от городской суеты.</p>
+                    <p>Наша кухня сочетает в себе лучшие традиции домашней кухни и современные гастрономические тенденции. Мы используем только свежие и качественные продукты, чтобы порадовать вас неповторимым вкусом наших блюд.</p>
+                    <p>В нашем кафе есть специальная детская зона с игровым уголком, где малыши могут весело провести время под присмотром аниматора, пока родители наслаждаются трапезой.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Интерьер кафе">
+                </div>
+            </div>
+        </section>
+        
+        <section class="menu">
+            <h2>Наше меню</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Пицца">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Домашняя пицца</h3>
+                        <p>Свежее тесто, фирменный томатный соус и начинка на выбор</p>
+                        <p class="menu-price">450 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2FsYWR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Салат">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Свежий салат</h3>
+                        <p>Смесь салатных листьев, овощей с заправкой на выбор</p>
+                        <p class="menu-price">320 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGFzdGF8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Паста">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Итальянская паста</h3>
+                        <p>Спагетти с соусом болоньезе или карбонара</p>
+                        <p class="menu-price">380 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Десерт">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Домашний десерт</h3>
+                        <p>Тирамису, чизкейк или ягодный пирог на выбор</p>
+                        <p class="menu-price">280 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1517244683847-7456b63c5969?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=80" alt="Кофе">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Ароматный кофе</h3>
+                        <p>Эспрессо, капучино, латте и другие виды кофе</p>
+                        <p class="menu-price">180 руб.</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNtb290aGllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Смузи">
+                    </div>
+                    <div class="menu-content">
+                        <h3 class="menu-title">Фруктовые смузи</h3>
+                        <p>Освежающие смузи из свежих фруктов и ягод</p>
+                        <p class="menu-price">250 руб.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="reviews">
+            <h2>Отзывы наших гостей</h2>
+            <div class="reviews-container">
+                <div class="review">
+                    <div class="review-text">
+                        "Очень уютное место с потрясающей атмосферой! Еда была восхитительной, особенно пицца. Обслуживание на высшем уровне. Обязательно вернемся снова!"
+                    </div>
+                    <div class="review-author">
+                        <div class="review-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Анна">
+                        </div>
+                        <div>
+                            <div class="review-name">Анна и Михаил</div>
+                            <div>Постоянные гости</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review">
+                    <div class="review-text">
+                        "Идеальное место для семейного ужина! Детям очень понравился игровой уголок, а мы смогли спокойно поужинать и пообщаться. Блюда очень вкусные и порции generous."
+                    </div>
+                    <div class="review-author">
+                        <div class="review-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Дмитрий">
+                        </div>
+                        <div>
+                            <div class="review-name">Дмитрий и семья</div>
+                            <div>Гости</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review">
+                    <div class="review-text">
+                        "Были на завтраке в этом милом кафе - остались в полном восторге! Кофе просто великолепный, выпечка свежайшая. Интерьер очень стильный и уютный. Рекомендую!"
+                    </div>
+                    <div class="review-author">
+                        <div class="review-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Елена">
+                        </div>
+                        <div>
+                            <div class="review-name">Елена</div>
+                            <div>Постоянный гость</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="reservation" class="reservation">
+            <h2>Забронируйте столик</h2>
+            <p>Оставьте заявку, и мы свяжемся с вами для подтверждения бронирования</p>
+            <form class="reservation-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Ваш телефон" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <input type="time" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="" disabled selected>Количество гостей</option>
+                        <option value="1">1 человек</option>
+                        <option value="2">2 человека</option>
+                        <option value="3">3 человека</option>
+                        <option value="4">4 человека</option>
+                        <option value="5+">5 и более человек</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Забронировать</button>
+            </form>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-mug-hot"></i>
+            </div>
+            <div class="contact-info">
+                <p>г. Москва, ул. Примерная, 15</p>
+                <p>Телефон: +7 (495) 123-45-67</p>
+                <p>Часы работы: ежедневно с 9:00 до 23:00</p>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-vk"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>© 2023 Семейное кафе "Вкусный уголок". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка формы бронирования
+        document.querySelector('.reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время для подтверждения бронирования.');
+            this.reset();
+        });
+        
+        // Плавная прокрутка к разделу бронирования
+        document.querySelector('a[href="#reservation"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#reservation').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
